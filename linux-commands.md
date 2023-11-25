@@ -13,7 +13,7 @@ ls /dev/tty*
 Use the command before and after connecting the Arduino to see which new port appears.
 
 If it doesn't appear use Arduino IDE and go to Tools --> port.
-
+***
 
 ### Reading Data from Serial Port using cat command
 ```bash
