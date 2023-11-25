@@ -1,5 +1,5 @@
 ### Linux Commands
 
-#### Command 1 - Description
+#### Using Python for Serial Communication
 ```bash
 pip install pyserial
