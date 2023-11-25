@@ -9,6 +9,7 @@ pip install pyserial
 ```bash
 ls /dev/tty*
 ```
-<!-- Visible comment: This comment will appear in the rendered README file -->
+Visible comment: This comment will appear in the rendered README file
+
 
 
