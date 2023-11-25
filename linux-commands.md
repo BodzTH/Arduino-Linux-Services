@@ -19,7 +19,7 @@ cat /dev/ttyS0
 ```
 
 Replace /dev/ttyS0 with your Arduino's serial port.
-<u>Underlined Text</u>
+
 ### To run python file from terminal:
 ```bash
 python filename.py
