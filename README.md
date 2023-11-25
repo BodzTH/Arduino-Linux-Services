@@ -5,4 +5,4 @@
 
 [![Download DHT-11 Library](https://img.shields.io/badge/Download-DHT--11--lib-blue.svg)](https://github.com/markruys/arduino-DHT/archive/master.zip)
 
-Click the badge above to download the DHT-11 sensor library.
+Click the badge above to download the DHT-11 sensor library zip file.
