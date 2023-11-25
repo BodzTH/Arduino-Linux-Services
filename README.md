@@ -11,6 +11,6 @@ Click the badge above to download the DHT-11 sensor library zip file.
 ### Linux Commands
 
 #### Command 1 - Description
-
+```bash
 # Command 1 explanation
 command1 --option1 argument1
