@@ -4,7 +4,7 @@
 ```bash
 pip install pyserial
 ```
-
+***
 
 ### Identify the port to which the Arduino is connected:
 ```bash
