@@ -16,7 +16,7 @@ If it doesn't appear use Arduino IDE and go to Tools --> port.
 
 ---
 
-### Reading Data from Serial Port using cat command
+### Reading Data from Serial Port using cat command:
 ```bash
 cat /dev/ttyS0
 ```
