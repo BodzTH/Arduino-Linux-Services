@@ -9,6 +9,6 @@ pip install pyserial
 ```bash
 ls /dev/tty*
 ```
+<!-- Visible comment: This comment will appear in the rendered README file -->
 
-<!-- If it doesn't work use Arduino IDE by going to Tools -- Port>
 
