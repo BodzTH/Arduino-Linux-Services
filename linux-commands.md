@@ -1,4 +1,4 @@
-### Linux Commands
+# Linux Commands
 
 #### Using Python for Serial Communication:
 ```bash
