@@ -10,33 +10,49 @@ WiFiClient client;
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    
-  }
-
-  
 }
 
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
-    if (!client.connected()) {
-      if (client.connect(serverIP, serverPort)) {
-        while (Serial.available() > 0) {
+    if (client.connected()) {
+      String server = client.readString();
+      if (server == "LCD") {
+        if (Serial.available() > 0) {
           String s = Serial.readString();
           client.println(s);
+        } else {
+          client.println("No connection with Arduino");
         }
-        client.println("Hello, Server!"); // Send a test message if no serial data available
+      } else if (server == "Motion Sensor") {
+        if (Serial.available() > 0) {
+          String s = Serial.readString();
+          client.println(s);
+        } else {
+          client.println("No connection with Arduino");
+        }
+      } else if (server == "TempHum") {
+        if (Serial.available() > 0) {
+          String s = Serial.readString();
+          client.println(s);
+        } else {
+          client.println("No connection with Arduino");
+        }
+      } else if (server == "Moorse Code") {
+        if (Serial.available() > 0) {
+          String s = Serial.readString();
+          client.println(s);
+        } else {
+          client.println("No connection with Arduino");
+        }
       } else {
-        client.println("Connection to server failed");
+        // Case handling from python
+      }
+      // If statement for TCP??
+      if (client.connect(serverIP, serverPort)) {
+        client.println("Hello, Server!"); // Send a test message if no serial data available
       }
     }
   } else {
-    
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-    }
+    // Handle situations when WiFi is not connected
   }
 }
