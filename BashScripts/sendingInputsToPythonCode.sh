@@ -11,15 +11,21 @@ PYTHON_PID=$!
 
 # Function to send input to the Python script
 send_input() {
-    input="$1"
-    echo "$input"
+    read -p "Enter message to send ('q' to quit): " user_input
+    echo "$user_input"
     sleep 1  # Optional delay after sending input
 }
 
-# Example inputs to send
-send_input "Hello, Python!"
-send_input "How are you?"
-send_input "q"  # To quit
+# Loop to continuously get user input until 'q' is entered
+while true; do
+    input=$(send_input)
+
+    # Pass user input to the Python script
+    echo "$input" >&"${PYTHON_PID}Input"
+    if [[ "$input" == "q" ]]; then
+        break
+    fi
+done
 
 # Wait for the Python process to finish
 wait $PYTHON_PID
