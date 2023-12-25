@@ -19,3 +19,16 @@ This guide outlines the steps to create a custom service on Ubuntu using systemd
 1. Open a text editor and create a new file named `myservice.service`.
 2. Define the service configuration using the following template:
 
+[Unit]
+Description=My Custom Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/path/to/your/script/myservice.sh
+Restart=always
+User=your_username
+Group=your_groupname
+
+[Install]
+WantedBy=multi-user.target
