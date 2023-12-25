@@ -50,3 +50,5 @@ Replace:
 
 - If your service fails to start, check logs: `journalctl -xe`.
 - Ensure your script runs independently outside the service context.
+
+  [explanition video](https://youtu.be/2gyKkgguyxE?si=xlyiLLJa7f_7iJ3S)
