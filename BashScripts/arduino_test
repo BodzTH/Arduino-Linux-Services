@@ -12,7 +12,7 @@ while true; do
         "morse")
             echo "$input_b"
             # Run the morse_script.sh with input_b as an argument
-            /home/omar/test3 "$input_b"
+            /home/omar/morse "$input_b"
             
             ;;
         "lcd")
