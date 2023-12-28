@@ -1,0 +1,37 @@
+#!/bin/bash
+
+while true; do
+    # Prompt the user for input
+    read -p "Enter two things separated by space for option 'a': " input_a input_b
+
+    # Convert input to lowercase for case-insensitive comparison
+    option=$(echo "$input_a" | tr '[:upper:]' '[:lower:]')
+
+    # Check the input provided
+    case "$option" in
+        "morse")
+            echo "$input_b"
+            # Run the morse_script.sh with input_b as an argument
+            /home/omar/test3 "$input_b"
+            
+            ;;
+        "lcd")
+            # Run the lcd_script.sh with input_b as an argument
+            ./lcd_script.sh "$input_b"
+            ;;
+        "temp")
+            ./temp_script.sh "$input_b"
+            ;;
+        "motion")
+            ./motion_script.sh "$input_b"
+            ;;
+        "quit")
+            echo "Exiting the loop."
+            break  # Exit the while loop
+            ;;
+        *)
+            echo "Invalid option: $option"
+            echo "Options are 'a', 'b', 'c', 'd', or 'quit'"
+            ;;
+    esac
+done
