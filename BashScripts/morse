@@ -1,3 +1,34 @@
 #!/bin/bash
 input_b="$1"
-python3 server.py "morse" "$input_b" "q"
+#!/bin/bash
+
+declare -A morse=(
+    ['A']='.-' ['B']='-...' ['C']='-.-.' ['D']='-..' ['E']='.'
+    ['F']='..-.' ['G']='--.' ['H']='....' ['I']='..' ['J']='.---'
+    ['K']='-.-' ['L']='.-..' ['M']='--' ['N']='-.' ['O']='---'
+    ['P']='.--.' ['Q']='--.-' ['R']='.-.' ['S']='...' ['T']='-'
+    ['U']='..-' ['V']='...-' ['W']='.--' ['X']='-..-' ['Y']='-.--'
+    ['Z']='--..'
+    ['0']='-----' ['1']='.----' ['2']='..---' ['3']='...--' ['4']='....-' 
+    ['5']='.....' ['6']='-....' ['7']='--...' ['8']='---..' ['9']='----.'
+)
+
+
+
+# Convert the input string to uppercase
+input_string=$(echo "$input_b" | tr '[:lower:]' '[:upper:]')
+
+# Loop through each character in the input string
+for (( i=0; i<${#input_string}; i++ )); do
+    char="${input_string:$i:1}"
+    # Check if the character exists in the Morse code dictionary
+    if [[ ${morse[$char]+_} ]]; then
+        printf "%s " "${morse[$char]}"
+    else
+        printf "? "  # Output '?' for unrecognized characters
+    fi
+done
+
+echo  # Move to a new line after printing Morse code
+
+python3 UDP_server_morse_lcd.py "morse" "$input_b" "q"
