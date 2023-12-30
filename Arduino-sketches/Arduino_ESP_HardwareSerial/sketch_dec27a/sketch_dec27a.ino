@@ -632,18 +632,18 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     char command = Serial.read(); // Read incoming command from serial
-
+    
     if (command == 'D') {
       // Run DHT11 sensor project
       float humidity = dht.readHumidity();
       float temperature = dht.readTemperature();
-      
+
       Serial.print("Humidity: ");
       Serial.print(humidity);
       Serial.print("% Temperature: ");
       Serial.print(temperature);
       Serial.print("C");
-      delay(500);
+      delay(950);
     } else if (command == 'L') {
       // Run LCD project
       while (!Serial.available()) {} // Wait until text is available
@@ -653,20 +653,28 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(text);
-      delay(500);
+      delay(350);
     } else if (command == 'M') {
       // Run motion sensor project
-      int motionState = digitalRead(MOTION_SENSOR_PIN);
-      Serial.println(motionState);
-      delay(500);
+      int sensorValue = digitalRead(MOTION_SENSOR_PIN);
+
+      if (sensorValue == HIGH)
+      {
+        Serial.println("Motion Detected!");
+      }
+      else
+      {
+        Serial.println("No Motion Detected.");
+      }
+
+      Serial.println(sensorValue);
+      delay(950);
     } else if (command == 'B') {
-      
+
       while (!Serial.available()) {} // Wait until text is available
-      code = Serial.readString();
-      Serial.println(code + " = ");
+      code = Serial.readStringUntil('\n'); // Read text from serial until newline
       String2Morse();
-      delay(400);
-      Serial.println();
+      delay(1400);
     }
   }
 }
