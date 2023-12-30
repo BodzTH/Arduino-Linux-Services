@@ -11,7 +11,6 @@ LiquidCrystal_I2C lcd(I2C_ADDR, LCD_COLS, LCD_ROWS); // Initialize the LCD
 #define DHTPIN 2      // Define DHT11 pin
 #define DHTTYPE DHT11 // Define DHT type
 #define MOTION_SENSOR_PIN 3 // Define motion sensor pin
-#define BUZZER_PIN 4 // Define buzzer pin
 
 DHT dht(DHTPIN, DHTTYPE); // Initialize DHT sensor
 
@@ -441,7 +440,7 @@ void morse() {
     E();
     Serial.print(" ");
   }
-  else if (ch == 'f' || ch == 'f')
+  else if (ch == 'F' || ch == 'f')
   {
     f();
     Serial.print(" ");
@@ -632,7 +631,7 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     char command = Serial.read(); // Read incoming command from serial
-    
+
     if (command == 'D') {
       // Run DHT11 sensor project
       float humidity = dht.readHumidity();
@@ -643,7 +642,6 @@ void loop() {
       Serial.print("% Temperature: ");
       Serial.print(temperature);
       Serial.print("C");
-      delay(950);
     } else if (command == 'L') {
       // Run LCD project
       while (!Serial.available()) {} // Wait until text is available
@@ -653,7 +651,11 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(text);
-      delay(350);
+
+      if (text.length() > 16) {
+        lcd.setCursor(0, 1);
+        lcd.print(text.substring(16));
+      }
     } else if (command == 'M') {
       // Run motion sensor project
       int sensorValue = digitalRead(MOTION_SENSOR_PIN);
@@ -666,15 +668,12 @@ void loop() {
       {
         Serial.println("No Motion Detected.");
       }
-
-      Serial.println(sensorValue);
-      delay(950);
     } else if (command == 'B') {
 
       while (!Serial.available()) {} // Wait until text is available
       code = Serial.readStringUntil('\n'); // Read text from serial until newline
       String2Morse();
-      delay(1400);
     }
   }
+  delay(700);
 }
