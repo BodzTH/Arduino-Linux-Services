@@ -1,10 +1,10 @@
 [Unit]
-Description=Run Once After Boot
+Description=welcome service
 After=multi-user.target
 
 [Service]
 Type=oneshot
-ExecStart=/path/to/your/script.sh
+ExecStart=/home/omar/welcomeService
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
