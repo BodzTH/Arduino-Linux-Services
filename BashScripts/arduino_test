@@ -10,8 +10,9 @@ while true; do
     # Check the input provided
     case "$option" in
         "morse")
+            echo "$input_b"
             # Run the morse_script.sh with input_b as an argument
-            /home/omar/morse "$input_b"
+            /home/omar/udp_morse "$input_b"
             
             ;;
         "lcd")
@@ -19,10 +20,10 @@ while true; do
             /home/omar/lcd "$input_b"
             ;;
         "temp")
-            ./temp_script.sh "$input_b"
+            /home/omar/temp
             ;;
         "motion")
-            ./motion_script.sh "$input_b"
+            /home/omar/motion
             ;;
         "quit")
             echo "Exiting the loop."
