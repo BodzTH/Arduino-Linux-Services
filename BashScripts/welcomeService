@@ -1,0 +1,17 @@
+#!/bin/bash
+
+desired_ssid="omar"
+connected=false
+
+while [ "$connected" = false ]; do
+    ssid=$(iwgetid -r)
+    if [ "$ssid" = "$desired_ssid" ]; then
+        connected=true
+    else
+        sleep 5  # Wait for 5 seconds before checking again
+    fi
+done
+
+# Call the bash script containing the Python server
+# /home/bodz/server_service/start_server.sh  # Replace this with the path to your server bash script
+python3 UDP_server_morse_lcd.py "lcd" "welcome" "q"
