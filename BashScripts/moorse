@@ -1,6 +1,5 @@
 #!/bin/bash
 input_b="$1"
-#!/bin/bash
 
 declare -A morse=(
     ['A']='.-' ['B']='-...' ['C']='-.-.' ['D']='-..' ['E']='.'
@@ -29,6 +28,25 @@ for (( i=0; i<${#input_string}; i++ )); do
     fi
 done
 
-echo  # Move to a new line after printing Morse code
 
-python3 UDP_server_morse_lcd.py "morse" "$input_b" "q"
+desired_ssid="Study"
+ssid=$(iwgetid -r)
+
+if [ "$ssid" = "$desired_ssid" ]; then
+    echo "3$input_b"
+else
+    echo "Not connected to the desired Wi-Fi network."
+    exit 1  # Exiting the script if not connected
+fi
+
+# Sending the UDP message only if connected to the desired Wi-Fi network
+echo "3$input_b" | nc -u 192.168.0.109 5009 > /dev/null 2>&1 &
+
+
+if [ $? -eq 0 ]; then
+    echo "UDP message sent successfully."
+else
+    echo "Failed to send UDP message."
+fi
+
+exit 0  
