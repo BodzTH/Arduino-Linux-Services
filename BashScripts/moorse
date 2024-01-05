@@ -12,6 +12,11 @@ declare -A morse=(
     ['5']='.....' ['6']='-....' ['7']='--...' ['8']='---..' ['9']='----.'
 )
 
+connect_to_wifi() {
+    echo "Not connected to the desired Wi-Fi network. Trying to connect..."
+    nmcli device wifi connect "$desired_ssid"
+}
+
 
 
 # Convert the input string to uppercase
@@ -29,14 +34,13 @@ for (( i=0; i<${#input_string}; i++ )); do
 done
 
 
-desired_ssid="Study"
+desired_ssid="ESP01S"
 ssid=$(iwgetid -r)
 
 if [ "$ssid" = "$desired_ssid" ]; then
     echo "3$input_b"
 else
-    echo "Not connected to the desired Wi-Fi network."
-    exit 1  # Exiting the script if not connected
+    connect_to_wifi
 fi
 
 # Sending the UDP message only if connected to the desired Wi-Fi network

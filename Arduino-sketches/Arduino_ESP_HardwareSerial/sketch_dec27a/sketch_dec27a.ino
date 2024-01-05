@@ -8,9 +8,9 @@
 
 LiquidCrystal_I2C lcd(I2C_ADDR, LCD_COLS, LCD_ROWS); // Initialize the LCD
 
-#define DHTPIN 2      // Define DHT11 pin
-#define DHTTYPE DHT11 // Define DHT type
-#define MOTION_SENSOR_PIN 3 // Define motion sensor pin
+#define DHTPIN 2            // Define DHT11 pin
+#define DHTTYPE DHT11       // Define DHT type
+#define MOTION_SENSOR_PIN 4 // Define motion sensor pin
 
 DHT dht(DHTPIN, DHTTYPE); // Initialize DHT sensor
 
@@ -22,8 +22,8 @@ char ch;
 char new_char;
 int unit_delay = 250;
 
-void dot() {
-  Serial.print(".");
+void dot()
+{
   digitalWrite(led, HIGH);
   digitalWrite(buz, HIGH);
   delay(unit_delay);
@@ -32,8 +32,8 @@ void dot() {
   delay(unit_delay);
 }
 
-void dash() {
-  Serial.print("-");
+void dash()
+{
   digitalWrite(led, HIGH);
   digitalWrite(buz, HIGH);
   delay(unit_delay * 3);
@@ -42,7 +42,8 @@ void dash() {
   delay(unit_delay * 3);
 }
 
-void A() {
+void A()
+{
   dot();
   delay(unit_delay);
   dash();
@@ -414,237 +415,206 @@ void zero()
   delay(unit_delay);
 }
 
-
-void morse() {
-  if (ch == 'A' || ch == 'a') {
+void morse()
+{
+  if (ch == 'A' || ch == 'a')
+  {
     A();
-    Serial.print(" ");
   }
   else if (ch == 'B' || ch == 'b')
   {
     B();
-    Serial.print(" ");
   }
   else if (ch == 'C' || ch == 'c')
   {
     C();
-    Serial.print(" ");
   }
   else if (ch == 'D' || ch == 'd')
   {
     D();
-    Serial.print(" ");
   }
   else if (ch == 'E' || ch == 'e')
   {
     E();
-    Serial.print(" ");
   }
   else if (ch == 'F' || ch == 'f')
   {
     f();
-    Serial.print(" ");
   }
   else if (ch == 'G' || ch == 'g')
   {
     G();
-    Serial.print(" ");
   }
   else if (ch == 'H' || ch == 'h')
   {
     H();
-    Serial.print(" ");
   }
   else if (ch == 'I' || ch == 'i')
   {
     I();
-    Serial.print(" ");
   }
   else if (ch == 'J' || ch == 'j')
   {
     J();
-    Serial.print(" ");
   }
   else if (ch == 'K' || ch == 'k')
   {
     K();
-    Serial.print(" ");
   }
   else if (ch == 'L' || ch == 'l')
   {
     L();
-    Serial.print(" ");
   }
   else if (ch == 'M' || ch == 'm')
   {
     M();
-    Serial.print(" ");
   }
   else if (ch == 'N' || ch == 'n')
   {
     N();
-    Serial.print(" ");
   }
   else if (ch == 'O' || ch == 'o')
   {
     O();
-    Serial.print(" ");
   }
   else if (ch == 'P' || ch == 'p')
   {
     P();
-    Serial.print(" ");
   }
   else if (ch == 'Q' || ch == 'q')
   {
     Q();
-    Serial.print(" ");
   }
   else if (ch == 'R' || ch == 'r')
   {
     R();
-    Serial.print(" ");
   }
   else if (ch == 'S' || ch == 's')
   {
     S();
-    Serial.print(" ");
   }
   else if (ch == 'T' || ch == 't')
   {
     T();
-    Serial.print(" ");
   }
   else if (ch == 'U' || ch == 'u')
   {
     U();
-    Serial.print(" ");
   }
   else if (ch == 'V' || ch == 'v')
   {
     V();
-    Serial.print(" ");
   }
   else if (ch == 'W' || ch == 'w')
   {
     W();
-    Serial.print(" ");
   }
   else if (ch == 'X' || ch == 'x')
   {
     X();
-    Serial.print(" ");
   }
   else if (ch == 'Y' || ch == 'y')
   {
     Y();
-    Serial.print(" ");
   }
   else if (ch == 'Z' || ch == 'z')
   {
     Z();
-    Serial.print(" ");
   }
   else if (ch == '0')
   {
     zero();
-    Serial.print(" ");
   }
   else if (ch == '1')
   {
     one();
-    Serial.print(" ");
   }
   else if (ch == '2')
   {
     two();
-    Serial.print(" ");
   }
   else if (ch == '3')
   {
     three();
-    Serial.print(" ");
   }
   else if (ch == '4')
   {
     four();
-    Serial.print(" ");
   }
   else if (ch == '5')
   {
     five();
-    Serial.print(" ");
   }
   else if (ch == '6')
   {
     six();
-    Serial.print(" ");
   }
   else if (ch == '7')
   {
     seven();
-    Serial.print(" ");
   }
   else if (ch == '8')
   {
     eight();
-    Serial.print(" ");
   }
   else if (ch == '9')
   {
     nine();
-    Serial.print(" ");
   }
 
-  else if (ch == ' ') {
+  else if (ch == ' ')
+  {
     delay(unit_delay * 7);
-    Serial.print("/ ");
   }
-  else if (ch == '\n') {
-    Serial.println("");
+  else if (ch == '\n')
+  {
   }
-  else {
-    Serial.println("Unknown Character!");
+  else
+  {
   }
-
 }
 
-
-void String2Morse() {
+void String2Morse()
+{
   len = code.length();
-  for (int i = 0; i < len; i++) {
+  for (int i = 0; i < len; i++)
+  {
     ch = code.charAt(i);
     morse();
   }
 }
-void setup() {
+void setup()
+{
   pinMode(MOTION_SENSOR_PIN, INPUT); // Set the motion sensor pin as input
   pinMode(led, OUTPUT);
   pinMode(buz, OUTPUT);
-  Serial.begin(9600);  // Initialize serial communication
-  lcd.init();          // Initialize the LCD
-  lcd.backlight();     // Turn on the backlight (if available)
-  dht.begin();         // Start DHT sensor
+  Serial.begin(9600); // Initialize serial communication
+  lcd.init();         // Initialize the LCD
+  lcd.backlight();    // Turn on the backlight (if available)
+  dht.begin();        // Start DHT sensor
   delay(500);
 }
 
-void loop() {
-  if (Serial.available() > 0) {
+void loop()
+{
+  if (Serial.available() > 0)
+  {
     char command = Serial.read(); // Read incoming command from serial
 
-    if (command == 'D') {
+    if (command == 'D')
+    {
       // Run DHT11 sensor project
       float humidity = dht.readHumidity();
       float temperature = dht.readTemperature();
 
-      Serial.print("Humidity: ");
-      Serial.print(humidity);
-      Serial.print("% Temperature: ");
-      Serial.print(temperature);
-      Serial.print("C");
-    } else if (command == 'L') {
+      Serial.println("Humidity: " + String(humidity) + "% Temperature: " + String(temperature) + "C");
+    }
+    else if (command == 'L')
+    {
       // Run LCD project
-      while (!Serial.available()) {} // Wait until text is available
+      while (!Serial.available())
+      {
+      } // Wait until text is available
 
       String text = Serial.readStringUntil('\n'); // Read text from serial until newline
 
@@ -652,11 +622,14 @@ void loop() {
       lcd.setCursor(0, 0);
       lcd.print(text);
 
-      if (text.length() > 16) {
+      if (text.length() > 16)
+      {
         lcd.setCursor(0, 1);
         lcd.print(text.substring(16));
       }
-    } else if (command == 'M') {
+    }
+    else if (command == 'M')
+    {
       // Run motion sensor project
       int sensorValue = digitalRead(MOTION_SENSOR_PIN);
 
@@ -668,12 +641,16 @@ void loop() {
       {
         Serial.println("No Motion Detected.");
       }
-    } else if (command == 'B') {
+    }
+    else if (command == 'B')
+    {
 
-      while (!Serial.available()) {} // Wait until text is available
+      while (!Serial.available())
+      {
+      }                                    // Wait until text is available
       code = Serial.readStringUntil('\n'); // Read text from serial until newline
       String2Morse();
     }
   }
-  delay(700);
+  delay(200);
 }

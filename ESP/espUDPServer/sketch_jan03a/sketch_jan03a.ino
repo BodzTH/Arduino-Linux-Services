@@ -27,9 +27,6 @@ void setup()
     delay(500);
   }
 
-  Serial.print("Connected! IP address: ");
-  Serial.println(WiFi.localIP());
-  Serial.printf("UDP server on port %d\n", localPort);
   Udp.begin(localPort);
 }
 
@@ -40,7 +37,7 @@ void loop()
   {
     IPAddress remoteIP = Udp.remoteIP();
     unsigned int remotePort = Udp.remotePort();
-
+    delay(200);
     int len = Udp.read(packetBuffer, sizeof(packetBuffer));
     if (len > 0)
     {
@@ -51,7 +48,6 @@ void loop()
       if (line == '1')
       {
         Serial.write('D');
-        delay(500);
         String s = Serial.readStringUntil('\r');
         Udp.beginPacket(remoteIP, remotePort);
         Udp.print(s);
@@ -72,7 +68,6 @@ void loop()
           }
         }
         Serial.print('L' + lcd); // Print 'B' and Morse data
-        delay(500);
       }
       else if (line == '3')
       {
@@ -89,12 +84,10 @@ void loop()
           }
         }
         Serial.print('B' + moorse); // Print 'B' and Morse data
-        delay(500);
       }
       else if (line == '4')
       {
         Serial.write('M');
-        delay(500);
         String s = Serial.readStringUntil('\r');
         Udp.beginPacket(remoteIP, remotePort);
         Udp.print(s);

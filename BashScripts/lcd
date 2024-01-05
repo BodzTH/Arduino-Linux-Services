@@ -1,0 +1,32 @@
+#!/bin/bash
+
+connect_to_wifi() {
+    echo "Not connected to the desired Wi-Fi network. Trying to connect..."
+    nmcli device wifi connect "$desired_ssid"
+}
+
+input_b="$1"
+input_c="$2"
+input_d="$3"
+input_e="$4"
+
+desired_ssid="ESP01S"
+ssid=$(iwgetid -r)
+
+if [ "$ssid" = "$desired_ssid" ]; then
+    echo "Connected to the desired Wi-Fi network."
+else
+    connect_to_wifi
+fi
+
+# Sending the UDP message only if connected to the desired Wi-Fi network
+echo "2$input_b" "$input_c" "$input_d" "$input_e" | nc -u 192.168.0.109 5009 > /dev/null 2>&1 &
+
+
+if [ $? -eq 0 ]; then
+    echo "UDP message sent successfully."
+else
+    echo "Failed to send UDP message."
+fi
+
+exit 0 

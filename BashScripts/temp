@@ -1,2 +1,22 @@
 #!/bin/bash
-python3 UDP_server_temp_motion.py "temp" 
+
+connect_to_wifi() {
+    echo "Not connected to the desired Wi-Fi network. Trying to connect..."
+    nmcli device wifi connect "$desired_ssid"
+}
+
+desired_ssid="ESP01S"
+ssid=$(iwgetid -r)
+
+if [ "$ssid" = "$desired_ssid" ]; then
+    echo "Connected to the desired Wi-Fi network."
+else
+    connect_to_wifi
+fi
+
+for i in {1..20}
+do
+   echo '1' | nc -u -w5 192.168.0.109 5009 &
+   sleep 1
+   
+done
