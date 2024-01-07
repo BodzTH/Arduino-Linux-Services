@@ -2,7 +2,7 @@
 Description=Run Logs Script every 1 hour
 
 [Timer]
-OnBootSec=5min
+OnBootSec=3min
 OnUnitActiveSec=60min
 
 [Install]
