@@ -3,18 +3,19 @@
 connect_to_wifi() {
     echo "Not connected to the desired Wi-Fi network. Trying to connect..."
     nmcli device wifi connect "$desired_ssid"
-    
 }
 
 desired_ssid="ESP01S"
 ssid=$(iwgetid -r)
 counter=1
 num_logs=5
-if [ "$ssid" = "$desired_ssid" ]; then
-    : # Do nothing
-else
+
+if [ "$ssid" != "$desired_ssid" ]; then
     connect_to_wifi
 fi
+
+
+ssid=$(iwgetid -r)
 
 if [ "$ssid" = "$desired_ssid" ]; then
     echo "Connected to the desired Wi-Fi network."
