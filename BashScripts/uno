@@ -2,28 +2,38 @@
 
 while true; do
     # Prompt the user for input
-    read -p "Enter two things separated by space for option 'a': " input_a input_b
+    read -p "Enter an option ('morse', 'lcd', 'temp', 'motion', 'help', or 'quit'): " input_option
 
     # Convert input to lowercase for case-insensitive comparison
-    option=$(echo "$input_a" | tr '[:upper:]' '[:lower:]')
+    option=$(echo "$input_option" | tr '[:upper:]' '[:lower:]')
 
     # Check the input provided
     case "$option" in
-        "moorse")
-            echo "$input_b"
-            # Run the morse_script.sh with input_b as an argument
-            /home/bodz/components_scripts/moorse "$input_b"
-            
+        "morse")
+            read -p "Enter a string for Morse code conversion: " input_morse
+            # Run the morse_script.sh with input_morse as an argument
+            /home/bodz/components_scripts/moorse "$input_morse"
             ;;
         "lcd")
-            # Run the lcd_script.sh with input_b as an argument
-            /home/bodz/components_scripts/lcd "$input_b"
+            read -p "Enter text to display on the LCD: " input_lcd
+            # Run the lcd_script.sh with input_lcd as an argument
+            /home/bodz/components_scripts/lcd "$input_lcd"
             ;;
         "temp")
+            # Run the temperature script
             /home/bodz/components_scripts/temp
             ;;
         "motion")
+            # Run the motion detection script
             /home/bodz/components_scripts/motion
+            ;;
+        "help")
+            echo "This script allows you to interact with various components:"
+            echo "  - 'morse + string that you want': Convert a string to Morse code"
+            echo "  - 'lcd + string that you want': Display text on an LCD"
+            echo "  - 'temp': Retrieve temperature information"
+            echo "  - 'motion': Run motion detection"
+            echo "  - 'quit': Exit the script"
             ;;
         "quit")
             echo "Exiting the loop."
@@ -31,7 +41,7 @@ while true; do
             ;;
         *)
             echo "Invalid option: $option"
-            echo "Options are 'a', 'b', 'c', 'd', or 'quit'"
+            echo "Options are 'morse', 'lcd', 'temp', 'motion', 'help', or 'quit'"
             ;;
     esac
 done
