@@ -1,17 +1,30 @@
 #!/bin/bash
 
-desired_ssid="omar"
-connected=false
+connect_to_wifi() {
+    echo "Not connected to the desired Wi-Fi network. Trying to connect..."
+    nmcli device wifi connect "$desired_ssid"
+}
 
-while [ "$connected" = false ]; do
-    ssid=$(iwgetid -r)
-    if [ "$ssid" = "$desired_ssid" ]; then
-        connected=true
-    else
-        sleep 5  # Wait for 5 seconds before checking again
-    fi
-done
+input_b="welcom to our arduino repository services"
 
-# Call the bash script containing the Python server
-# /home/bodz/server_service/start_server.sh  # Replace this with the path to your server bash script
-python3 UDP_server_morse_lcd.py "lcd" "welcome" "q"
+desired_ssid="ESP01S"
+ssid=$(iwgetid -r)
+
+if [ "$ssid" = "$desired_ssid" ]; then
+    echo "Connected to the desired Wi-Fi network."
+else
+    connect_to_wifi
+fi
+
+# Sending the UDP message only if connected to the desired Wi-Fi network
+echo "2$input_b" "$input_c" "$input_d" "$input_e" | nc -u 192.168.0.109 5009 > /dev/null 2>&1 &
+
+
+if [ $? -eq 0 ]; then
+    echo "UDP message sent successfully."
+else
+    echo "Failed to send UDP message."
+fi
+
+exit 0 
+
